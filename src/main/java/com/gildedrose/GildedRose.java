@@ -1,4 +1,4 @@
-// Revision 04 - Extract code that update quality into methods
+// Revision 05 - Simplify if and replace with switch
 package com.gildedrose;
 
 class GildedRose {
@@ -15,22 +15,24 @@ class GildedRose {
     }
 
     private void updateItemQuality(Item item) {
-        if (item.name.equals("Aged Brie")) {
-            incrementItemQuality(item);
-        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            incrementItemQuality(item);
-            if (item.sellIn < 11) {
+        switch (item.name) {
+            case "Aged Brie":
                 incrementItemQuality(item);
-            }
-            if (item.sellIn < 6) {
+                break;
+            case "Backstage passes to a TAFKAL80ETC concert":
                 incrementItemQuality(item);
-            }
-
-        } else {
-            if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            } else {
+                if (item.sellIn < 11) {
+                    incrementItemQuality(item);
+                }
+                if (item.sellIn < 6) {
+                    incrementItemQuality(item);
+                }
+                break;
+            case "Sulfuras, Hand of Ragnaros":
+                break;
+            default:
                 decrementItemQuality(item);
-            }
+                break;
         }
 
         if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
@@ -39,18 +41,17 @@ class GildedRose {
         }
 
         if (item.sellIn < 0) {
-            if (item.name.equals("Aged Brie")) {
-                incrementItemQuality(item);
-            } else {
-                if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            switch (item.name) {
+                case "Aged Brie":
+                    incrementItemQuality(item);
+                    break;
+                case "Backstage passes to a TAFKAL80ETC concert":
                     item.quality = 0;
-                } else {
-                    if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        return;
-                    }
-                    decrementItemQuality(item);
-                }
+                    break;
+                case "Sulfuras, Hand of Ragnaros":
+                    return;
             }
+            decrementItemQuality(item);
         }
     }
 

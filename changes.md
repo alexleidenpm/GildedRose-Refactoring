@@ -1,3 +1,10 @@
+05 - Simplify if and replace with switch
+
+- updateQuality() in GildedRose class:
+    - group the different if conditions on item names into switch clausules 
+
+---
+
 04 - Extract code that update quality into methods
 
 - updateQuality() in GildedRose class:

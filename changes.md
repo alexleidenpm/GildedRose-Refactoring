@@ -1,3 +1,12 @@
+03 - Simplify conditions. 
+
+- updateQuality() in GildedRose class:
+    - Backstage passes condition is always false --> remove if() block
+    - Backstage passes condition is always true --> remove if() condition, keep block code 
+    - 'item.quality - item.quality' expression can be simplified with 0
+     
+---
+
 02 - Used positive conditions
      
 Trying to find logic in updateQuality(). It's still very difficult to follow the nested conditions inside the method. Even more, when you find positive and negative conditions involved.

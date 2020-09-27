@@ -1,3 +1,12 @@
+04 - Extract code that update quality into methods
+
+- updateQuality() in GildedRose class:
+    - incrementItemQuality() always checks if quality<50
+    - decrementItemQuality() check  quality > 0. If another condition is used we can just change their order
+    - decrementItemQuality() fixed bug with automatic refactoring
+    
+---
+
 03 - Simplify conditions. 
 
 - updateQuality() in GildedRose class:

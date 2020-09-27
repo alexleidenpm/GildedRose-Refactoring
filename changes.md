@@ -1,3 +1,24 @@
+07 - add conjured items
+
+Once we have the code cleaned we can consider conjured items.
+
+If we were allowed to modify the item class we will easily add a property there, or better we will use inheritance
+
+With the current limitations, we can suppose conjured items have their name starting with "Conjured"
+
+Since it's not said anything about those conjured items, we can suppose that there are outside of
+the three special cases considerer before (Aged Brie, Backstage passes or Sulfuras)  
+
+Now we have our beautiful switch which checks the name property. To fit these items in our code, one easy solution is 
+adding code in the default block and check if the name starts with "Conjured" 
+
+- updateQuality() in GildedRose class:
+    - Added code in the default switch case checking if the item is conjured (its name starts with "Conjured")
+    - if we have a conjured item, we need to decrement its quality twice as fast as a normal item
+    - with the new logic that was not applied before, the test_results.txt file is updated
+        
+---
+
 06 - join switch code blocks
 
 If we have a look to the current code, we can see that name property is evaluated (switch) in two different parts

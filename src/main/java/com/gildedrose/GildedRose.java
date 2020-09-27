@@ -1,4 +1,4 @@
-// Revision 06 - join switch code blocks
+// Revision 07 - add conjured items
 package com.gildedrose;
 
 class GildedRose {
@@ -42,8 +42,15 @@ class GildedRose {
 
             default:
                 decrementItemQuality(item);
+                boolean isConjured = item.name.startsWith("Conjured");
+                if(isConjured)  {
+                    decrementItemQuality(item);
+                }
                 if (item.sellIn < 0) {
                     decrementItemQuality(item);
+                    if(isConjured)  {
+                        decrementItemQuality(item);
+                    }
                 }
                 break;
         }

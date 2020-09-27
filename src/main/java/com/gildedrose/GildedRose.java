@@ -1,4 +1,4 @@
-// Revision 03 - Simplify conditions
+// Revision 04 - Extract code that update quality into methods
 package com.gildedrose;
 
 class GildedRose {
@@ -9,57 +9,60 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (Item item : items) {
-            if (item.name.equals("Aged Brie")) {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
-            } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                    if (item.sellIn < 11) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-                    if (item.sellIn < 6) {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
-                    }
-                }
-            } else {
-                if (item.quality > 0) {
-                    if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                    } else {
-                        item.quality = item.quality - 1;
-                    }
-                }
+        for (Item item : items ) {
+            updateItemQuality(item);
+        }
+    }
+
+    private void updateItemQuality(Item item) {
+        if (item.name.equals("Aged Brie")) {
+            incrementItemQuality(item);
+        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            incrementItemQuality(item);
+            if (item.sellIn < 11) {
+                incrementItemQuality(item);
+            }
+            if (item.sellIn < 6) {
+                incrementItemQuality(item);
             }
 
+        } else {
             if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
             } else {
-                item.sellIn = item.sellIn - 1;
+                decrementItemQuality(item);
             }
+        }
 
-            if (item.sellIn < 0) {
-                if (item.name.equals("Aged Brie")) {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
+        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        } else {
+            item.sellIn = item.sellIn - 1;
+        }
+
+        if (item.sellIn < 0) {
+            if (item.name.equals("Aged Brie")) {
+                incrementItemQuality(item);
+            } else {
+                if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    item.quality = 0;
                 } else {
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        item.quality = 0;
-                    } else {
-                        if (item.quality > 0) {
-                            if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                continue;
-                            }
-                            item.quality = item.quality - 1;
-                        }
+                    if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                        return;
                     }
+                    decrementItemQuality(item);
                 }
             }
+        }
+    }
+
+    private void decrementItemQuality(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
+        }
+    }
+
+    private void incrementItemQuality(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
         }
     }
 }

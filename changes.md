@@ -1,3 +1,23 @@
+06 - join switch code blocks
+
+If we have a look to the current code, we can see that name property is evaluated (switch) in two different parts
+
+There is also a middle part which decrements sellin always except with item Sulfuras
+
+- updateQuality() in GildedRose class:
+    - I will first decrement the sellin variable before the switch block for all except Sulfuras.
+    I could also add in every other case of the switch and avoid one comparison
+    - I will then invert again the condition and extract this code into a method decrementDaysToSell(). 
+    I think the code is clearer 
+    - decrementing sellin at the beginning makes that the conditions for backstage passes are updated to 10 and 5 days
+    This was also stated in the requirements: 
+    "Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less"
+    Again, the code is easier to understand
+    - To join the second switch case we have to duplicate the codition 
+    "if (item.sellIn < 0)" in every case of the switch, except Sulfuras 
+    
+---
+
 05 - Simplify if and replace with switch
 
 - updateQuality() in GildedRose class:

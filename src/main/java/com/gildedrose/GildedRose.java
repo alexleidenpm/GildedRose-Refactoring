@@ -1,4 +1,4 @@
-// Revision 05 - Simplify if and replace with switch
+// Revision 06 - join switch code blocks
 package com.gildedrose;
 
 class GildedRose {
@@ -15,43 +15,43 @@ class GildedRose {
     }
 
     private void updateItemQuality(Item item) {
+        decrementDaysToSell(item);
         switch (item.name) {
-            case "Aged Brie":
-                incrementItemQuality(item);
-                break;
-            case "Backstage passes to a TAFKAL80ETC concert":
-                incrementItemQuality(item);
-                if (item.sellIn < 11) {
-                    incrementItemQuality(item);
-                }
-                if (item.sellIn < 6) {
-                    incrementItemQuality(item);
-                }
-                break;
             case "Sulfuras, Hand of Ragnaros":
                 break;
+
+            case "Aged Brie":
+                incrementItemQuality(item);
+                if (item.sellIn < 0) {
+                    incrementItemQuality(item);
+                }
+                break;
+
+            case "Backstage passes to a TAFKAL80ETC concert":
+                incrementItemQuality(item);
+                if (item.sellIn < 10) {
+                    incrementItemQuality(item);
+                }
+                if (item.sellIn < 5) {
+                    incrementItemQuality(item);
+                }
+                if (item.sellIn < 0) {
+                    item.quality = 0;
+                }
+                break;
+
             default:
                 decrementItemQuality(item);
+                if (item.sellIn < 0) {
+                    decrementItemQuality(item);
+                }
                 break;
         }
+    }
 
-        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-        } else {
+    private void decrementDaysToSell(Item item) {
+        if (!item.name.equals("Sulfuras, Hand of Ragnaros"))  {
             item.sellIn = item.sellIn - 1;
-        }
-
-        if (item.sellIn < 0) {
-            switch (item.name) {
-                case "Aged Brie":
-                    incrementItemQuality(item);
-                    break;
-                case "Backstage passes to a TAFKAL80ETC concert":
-                    item.quality = 0;
-                    break;
-                case "Sulfuras, Hand of Ragnaros":
-                    return;
-            }
-            decrementItemQuality(item);
         }
     }
 
